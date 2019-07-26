@@ -16,7 +16,13 @@ class Skins extends StatelessWidget {
         children: imgList
             .map(
               (skin) => InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    'imagePreview',
+                    arguments: Utils.getHeroSkin(skin['id']),
+                  );
+                },
                 child: Container(
                   margin: EdgeInsets.all(5),
                   width: screenWidth * 0.7,
