@@ -4,6 +4,7 @@ import 'package:lol/models/heroSimple.dart';
 import 'package:lol/models/heroDetail.dart';
 import 'package:lol/utils/utils.dart';
 import 'package:lol/widgets/detail/detailItem.dart';
+import 'package:lol/widgets/detail/skin.dart';
 
 class HeroDetail extends StatefulWidget {
   final HeroSimple heroSimple;
@@ -57,19 +58,7 @@ class _HeroDetailState extends State<HeroDetail> {
                   ),
                   DetailItem(
                     title: '皮肤',
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 150,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: _heroData.skins
-                            .map(
-                              (skin) =>
-                                  Image.network(Utils.getHeroSkin(skin['id']), height: 150,),
-                            )
-                            .toList(),
-                      ),
-                    ),
+                    child: Skins(imgList: _heroData.skins),
                   ),
                   DetailItem(
                     title: '类型',
