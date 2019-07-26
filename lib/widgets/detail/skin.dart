@@ -32,14 +32,14 @@ class Skins extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       children: <Widget>[
                         Image.network(Utils.getHeroSkin(skin['id']),
-                            height: 150, width: screenWidth * 0.7),
+                            height: 150, width: screenWidth * 0.7,fit: BoxFit.cover,),
                         Container(
                           width: screenWidth * 0.7,
                           color: Colors.grey[200].withOpacity(0.3),
                           alignment: Alignment.center,
                           height: 20,
                           child: Text(
-                            skin['name'],
+                            skin['name'] == 'default' ? '原画' : skin['name'],
                             style: TextStyle(color: Colors.white),
                           ),
                         )

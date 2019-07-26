@@ -5,6 +5,7 @@ import 'package:lol/models/heroDetail.dart';
 import 'package:lol/utils/utils.dart';
 import 'package:lol/widgets/detail/detailItem.dart';
 import 'package:lol/widgets/detail/skin.dart';
+import 'package:lol/widgets/detail/info.dart';
 
 class HeroDetail extends StatefulWidget {
   final HeroSimple heroSimple;
@@ -52,10 +53,6 @@ class _HeroDetailState extends State<HeroDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Image.network(
-                    Utils.getHeroSkin(_heroData.skins[0]['id']),
-                    fit: BoxFit.cover,
-                  ),
                   DetailItem(
                     title: '皮肤',
                     child: Skins(imgList: _heroData.skins),
@@ -64,30 +61,43 @@ class _HeroDetailState extends State<HeroDetail> {
                     title: '类型',
                     child: Row(
                         children: _heroData.tags
-                            .map((tag) => Text(Utils.heroTagsMap(tag)))
+                            .map((tag) => Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: CircleAvatar(
+                                    child: Text(
+                                      Utils.heroTagsMap(tag),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ))
                             .toList()),
                   ),
                   DetailItem(
                     title: '属性',
-                    child: Column(children: [
-                      Text(_heroData.info.attack.toString()),
-                      Text(_heroData.info.defense.toString()),
-                      Text(_heroData.info.magic.toString()),
-                      Text(_heroData.info.difficulty.toString()),
-                    ]),
+                    child: HeroInfo(data: _heroData.info),
                   ),
                   DetailItem(
                     title: '使用技巧',
                     child: Column(
                       children:
-                          _heroData.allytips.map((tip) => Text(tip)).toList(),
+                          _heroData.allytips.map((tip) => Column(
+                            children: <Widget>[
+                              Text(tip),
+                              SizedBox(height: 5)
+                            ],
+                          )).toList(),
                     ),
                   ),
                   DetailItem(
                     title: '对抗技巧',
                     child: Column(
                       children:
-                          _heroData.enemytips.map((tip) => Text(tip)).toList(),
+                          _heroData.enemytips.map((tip) => Column(
+                            children: <Widget>[
+                              Text(tip),
+                              SizedBox(height: 5)
+                            ],
+                          )).toList(),
                     ),
                   ),
                   DetailItem(
