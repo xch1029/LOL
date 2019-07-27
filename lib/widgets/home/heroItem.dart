@@ -20,7 +20,12 @@ class HeroItem extends StatelessWidget {
               Radius.circular(10.0),
             ),
           ),
-          color: Colors.white,
+          image: DecorationImage(
+            image: NetworkImage(Utils.getHeroAvatar(data.image['full'])),
+            fit: BoxFit.cover,
+            colorFilter: new ColorFilter.mode(
+                Colors.white.withOpacity(0.15), BlendMode.dstATop),
+          ),
           shadows: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -44,14 +49,17 @@ class HeroItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(data.name),
+                Text(data.name, style: TextStyle(fontSize: 16)),
                 Text(data.title),
                 Text(data.id),
                 RichText(
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
                     children: data.tags.map((tag) {
-                      return TextSpan(text: Utils.heroTagsMap(tag));
+                      return TextSpan(
+                        text: Utils.heroTagsMap(tag) + ' ',
+                        style: TextStyle(color: Colors.green),
+                      );
                     }).toList(),
                   ),
                 )

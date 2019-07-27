@@ -12,6 +12,8 @@ class Skins extends StatelessWidget {
       width: screenWidth,
       height: 150,
       child: ListView(
+        // 物理滚动
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: imgList
             .map(
@@ -31,8 +33,12 @@ class Skins extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.bottomCenter,
                       children: <Widget>[
-                        Image.network(Utils.getHeroSkin(skin['id']),
-                            height: 150, width: screenWidth * 0.7,fit: BoxFit.cover,),
+                        Image.network(
+                          Utils.getHeroSkin(skin['id']),
+                          height: 150,
+                          width: screenWidth * 0.7,
+                          fit: BoxFit.cover,
+                        ),
                         Container(
                           width: screenWidth * 0.7,
                           color: Colors.grey[200].withOpacity(0.3),

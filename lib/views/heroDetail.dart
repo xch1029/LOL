@@ -79,6 +79,7 @@ class _HeroDetailState extends State<HeroDetail> {
                   DetailItem(
                     title: '使用技巧',
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children:
                           _heroData.allytips.map((tip) => Column(
                             children: <Widget>[
@@ -91,6 +92,7 @@ class _HeroDetailState extends State<HeroDetail> {
                   DetailItem(
                     title: '对抗技巧',
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children:
                           _heroData.enemytips.map((tip) => Column(
                             children: <Widget>[

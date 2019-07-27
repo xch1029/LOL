@@ -28,7 +28,12 @@ class HeroInfo extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation(item['color']),
                       backgroundColor: Colors.grey[300],
                     ),
-                  )
+                  ),
+                  SizedBox(width: 10),
+                  SizedBox(
+                    width: 40,
+                    child: Text((100 * item['value']).toString(),style: TextStyle(color: item['color']),),
+                  ),
                 ],
               ),
             )
