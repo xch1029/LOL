@@ -80,26 +80,28 @@ class _HeroDetailState extends State<HeroDetail> {
                     title: '使用技巧',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          _heroData.allytips.map((tip) => Column(
-                            children: <Widget>[
-                              Text(tip),
-                              SizedBox(height: 5)
-                            ],
-                          )).toList(),
+                      children: _heroData.allytips
+                          .map((tip) => Column(
+                                children: <Widget>[
+                                  Text(tip),
+                                  SizedBox(height: 5)
+                                ],
+                              ))
+                          .toList(),
                     ),
                   ),
                   DetailItem(
                     title: '对抗技巧',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          _heroData.enemytips.map((tip) => Column(
-                            children: <Widget>[
-                              Text(tip),
-                              SizedBox(height: 5)
-                            ],
-                          )).toList(),
+                      children: _heroData.enemytips
+                          .map((tip) => Column(
+                                children: <Widget>[
+                                  Text(tip),
+                                  SizedBox(height: 5)
+                                ],
+                              ))
+                          .toList(),
                     ),
                   ),
                   DetailItem(
