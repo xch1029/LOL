@@ -17,8 +17,9 @@ class _HomeListState extends State<HomeList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: ListView.builder(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: ListView.builder(
         itemCount: widget.data.length,
         itemBuilder: (BuildContext context, int index) {
           return HeroItem(data: HeroSimple.fromJson(widget.data[index]));

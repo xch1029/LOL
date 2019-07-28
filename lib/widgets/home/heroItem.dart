@@ -20,12 +20,7 @@ class HeroItem extends StatelessWidget {
               Radius.circular(10.0),
             ),
           ),
-          image: DecorationImage(
-            image: NetworkImage(Utils.getHeroAvatar(data.image['full'])),
-            fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(
-                Colors.white.withOpacity(0.15), BlendMode.dstATop),
-          ),
+          color: Colors.grey[50],
           shadows: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -44,7 +39,7 @@ class HeroItem extends StatelessWidget {
             HeroItemAvatar(
               img: Utils.getHeroAvatar(data.image['full']),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 20),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

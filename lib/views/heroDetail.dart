@@ -46,7 +46,7 @@ class _HeroDetailState extends State<HeroDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.heroSimple.name)),
+      appBar: AppBar(title: Text(widget.heroSimple.name), elevation: 0),
       body: _loading
           ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
