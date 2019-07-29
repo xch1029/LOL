@@ -369,7 +369,7 @@ Built build\app\outputs\apk\release\app-release.apk (11.2MB).
 #### 打包方面相关链接
 - [Flutter官网APK打包教程](https://flutter.dev/docs/deployment/android)
 - [本项目打包配置代码`对比`](https://github.com/xch1029/LOL/commit/d2094e2f4182da22f9b3f767295b134fee578bf2)
-- [本项目APK下载](http://qiniu.tbmao.com/blogapp-release.apk)
+- [本项目APK下载](http://qiniu.tbmao.com/bloglol2.apk)
 
 
 
