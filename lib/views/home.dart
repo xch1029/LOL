@@ -34,6 +34,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
       appBar: AppBar(
         title: TabBar(
           controller: _tabController,
+          isScrollable: true,
           tabs: <Widget>[
             Tab(text: '战士'),
             Tab(text: '坦克'),
