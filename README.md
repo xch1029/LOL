@@ -262,6 +262,117 @@ class _HeroDetailState extends State<HeroDetail> {
 }
 ```
 
+### 打包APK
+打包APK通常需要三个步骤：
+Step1: 生成签名
+Step2: 对项目进行签名配置
+Step3: 打包
+
+#### Step1: 生成签名
+在打包APK之前需要生成一个签名文件，签名文件是APP的唯一标识：
+```
+keytool -genkey -v -keystore c:/Users/15897/Desktop/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+- `c:/Users/15897/Desktop/key.jks`表示文件的生成位置，我直接设置的桌面
+- `-validity 10000`设置的签名的有效时间
+- `-alias key`为签名文件起个别名，我直接设置成key
+
+执行这条命令行后，会有一个交互式的问答：
+```
+输入密钥库口令:
+再次输入新口令:
+您的名字与姓氏是什么?
+  [Unknown]:  hua
+您的组织单位名称是什么?
+  [Unknown]:  xxx
+您的组织名称是什么?
+  [Unknown]:  xxx
+您所在的城市或区域名称是什么?
+  [Unknown]:  xxx
+您所在的省/市/自治区名称是什么?
+  [Unknown]:  xxx
+该单位的双字母国家/地区代码是什么?
+  [Unknown]:  xxx
+CN=hua, OU=xxx, O=xxx, L=xxx, ST=xxx, C=xxx是否正确?
+  [否]:  y
+
+正在为以下对象生成 2,048 位RSA密钥对和自签名证书 (SHA256withRSA) (有效期为 10,000 天):
+         CN=hua, OU=xxx, O=xxx, L=xxx, ST=xxx, C=xxx
+输入 <key> 的密钥口令
+        (如果和密钥库口令相同, 按回车):
+[正在存储c:/Users/15897/Desktop/key.jks]
+```
+#### Step2: 对项目进行签名配置
+在项目中新建文件`<app dir>/android/key.properties`,文件中定义了四个变量，留着给`<app dir>/android/app/build.gradle`调用。
+
+前三个都是上一步用到的几个字段，第四个`storeFile`是签名文件的位置，文件位置是相对于`<app dir>/android/app/build.gradle`来说，所以需要将上一步生成了的`key.jks`复制到`<app dir>/android/app/`下。
+
+警告：文件涉及到密码啥的，所以最好不要上传到版本管理。
+```
+#  Note: Keep the key.properties file private; do not check it into public source control.
+storePassword=123456
+keyPassword=123456
+keyAlias=key
+storeFile=key.jks
+```
+再修改`<app dir>/android/app/build.gradle`（`这里才是正在的配置`）：
+```
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+
+```
+
+```
+signingConfigs {
+    release {
+        keyAlias keystoreProperties['keyAlias']
+        keyPassword keystoreProperties['keyPassword']
+        storeFile file(keystoreProperties['storeFile'])
+        storePassword keystoreProperties['storePassword']
+    }
+}
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+    }
+}
+```
+
+#### Step3: 打包
+执行打包命令：
+```
+flutter build apk
+```
+```
+You are building a fat APK that includes binaries for android-arm, android-arm64.
+If you are deploying the app to the Play Store, it's recommended to use app bundles or split the APK to reduce the APK size.
+    To generate an app bundle, run:
+        flutter build appbundle --target-platform android-arm,android-arm64
+        Learn more on: https://developer.android.com/guide/app-bundle
+    To split the APKs per ABI, run:
+        flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
+        Learn more on:  https://developer.android.com/studio/build/configure-apk-splits#configure-abi-split
+Initializing gradle...                                              3.6s
+Resolving dependencies...                                          26.8s
+Calling mockable JAR artifact transform to create file: C:\Users\15897\.gradle\caches\transforms-1\files-1.1\android.jar\e122fbb402658e4e43e8b85a067823c3\android.jar with input C:\Users\15897\AppData\Local\Android\Sdk\platforms\android-28\android.jar
+Running Gradle task 'assembleRelease'...
+Running Gradle task 'assembleRelease'... Done                      84.7s
+Built build\app\outputs\apk\release\app-release.apk (11.2MB).
+```
+打包完成后，apk文件就在这里`build\app\outputs\apk\release\app-release.apk`
+
+#### 打包方面相关链接
+- [Flutter官网APK打包教程](https://flutter.dev/docs/deployment/android)
+- [本项目打包配置代码`对比`](https://github.com/xch1029/LOL/commit/d2094e2f4182da22f9b3f767295b134fee578bf2)
+- [本项目APK下载](http://qiniu.tbmao.com/blogapp-release.apk)
+
+
+
 ### 更多链接
 - [源码](https://github.com/xch1029/LOL)
 - [博客](http://jser.tech/2019/07/28/lol)
