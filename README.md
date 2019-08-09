@@ -1,3 +1,7 @@
+- [本项目APK下载](http://qiniu.tbmao.com/bloglol2.apk)
+- [博客](http://jser.tech/2019/07/28/lol)
+- [掘金](https://juejin.im/post/5d3d733c6fb9a07ecf726d3a)
+
 ![](http://qiniu.tbmao.com/lollolapp.jpg)
 
 要说我最喜欢的游戏，那必须是英雄联盟。太多太多的回忆！今天我们一起使用`Flutter`来开发一款英雄资料卡。上图是APP的部分截图，APP的整体设计看上去还是很清爽的。首页使用Tab展示英雄的六大分类，点击英雄的条目会跳转到英雄的详情页面。
